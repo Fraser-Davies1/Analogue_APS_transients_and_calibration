@@ -1,0 +1,26 @@
+bench_name: "Active Pixel Fully Automated Bench"
+
+experiment:
+  title: "Precision Pixel Linearity Sweep"
+  description: "Fixed 500Hz Integration, 5V Rails, 5V Logic Reset. Sweeping LED Voltage."
+
+instruments:
+  psu:
+    profile: "keysight/EDU36311A"
+    safety_limits:
+      channels:
+        1: {voltage: {"max": 5.5}, current: {"max": 0.1}} # VDD
+        2: {voltage: {"max": 5.5}, current: {"max": 0.05}} # LED
+  
+  osc:
+    profile: "keysight/DSOX1204G"
+  
+  siggen:
+    profile: "keysight/EDU33212A"
+
+backend_defaults:
+  type: "lamb"
+  url: "http://lamb-server:8000"
+  timeout_ms: 30000
+
+simulate: false
