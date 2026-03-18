@@ -16,7 +16,7 @@ instruments:
     profile: "keysight/DSOX1204G"
   
   siggen:
-    profile: "keysight/EDU33212A"
+    profile: "EDU33212A_fixed.yaml"
 
 backend_defaults:
   type: "lamb"

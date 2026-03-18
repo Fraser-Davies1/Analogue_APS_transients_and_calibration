@@ -4,6 +4,18 @@ from scipy import signal, integrate
 from pytestlab import Bench
 import time
 
+# --- Monkeypatch for missing WaveformGeneratorConfig registration ---
+from pytestlab.config.loader import get_model_registry
+from pytestlab.config import WaveformGeneratorConfig
+try:
+    registry = get_model_registry()
+    if "waveform_generator" not in registry:
+        registry["waveform_generator"] = WaveformGeneratorConfig
+        print("  [FIX] Manually registered 'waveform_generator' in model registry.")
+except Exception as e:
+    print(f"  [WARN] Failed to patch model registry: {e}")
+# --------------------------------------------------------------------
+
 def run_perfect_analysis(num_frames=10):
     print(f"--- Starting Perfected Noise FFT (Blackman-Harris, 75% Overlap) ---")
     

@@ -1,0 +1,135 @@
+channels:
+- accuracy:
+    amplitude: 0.02
+    frequency: 1.0e-06
+  amplitude_range:
+    max_val: 500
+    min_val: 0.001
+  description: Channel 1
+  frequency_range:
+    max_val: 20000000.0
+    min_val: 1.0e-06
+  offset_range:
+    max_val: 10
+    min_val: -0.001
+- accuracy:
+    amplitude: 0.02
+    frequency: 1.0e-06
+  amplitude_range:
+    max_val: 10
+    min_val: 0.001
+  description: Channel 2
+  frequency_range:
+    max_val: 20000000.0
+    min_val: 1.0e-06
+  offset_range:
+    max_val: 10
+    min_val: -0.001
+device_type: waveform_generator
+manufacturer: Keysight
+model: EDU33212A
+scpi:
+  commands:
+    set_amplitude:
+      defaults:
+        channel: 1
+      template: SOUR{channel}:VOLTage {amplitude}
+      validators:
+        channel:
+          max: 2
+          min: 1
+    set_frequency:
+      defaults:
+        channel: 1
+      template: SOUR{channel}:FREQ {frequency}
+      validators:
+        channel:
+          max: 2
+          min: 1
+    set_function:
+      defaults:
+        channel: 1
+      template: SOUR{channel}:FUNC {function}
+      validators:
+        channel:
+          max: 2
+          min: 1
+    set_offset:
+      defaults:
+        channel: 1
+      template: SOUR{channel}:VOLTage:OFFSet {offset}
+      validators:
+        channel:
+          max: 2
+          min: 1
+    set_output_state:
+      defaults:
+        channel: 1
+      enums:
+        state:
+          true: 'ON'
+          false: 'OFF'
+          '1': 'ON'
+          '0': 'OFF'
+      template: OUTPut{channel}:STATe {state}
+      validators:
+        channel:
+          max: 2
+          min: 1
+  queries:
+    get_amplitude:
+      defaults:
+        channel: 1
+      response:
+        type: float
+      template: SOUR{channel}:VOLTage?
+      validators:
+        channel:
+          max: 2
+          min: 1
+    get_frequency:
+      defaults:
+        channel: 1
+      response:
+        type: float
+      template: SOUR{channel}:FREQ?
+      validators:
+        channel:
+          max: 2
+          min: 1
+    get_offset:
+      defaults:
+        channel: 1
+      response:
+        type: float
+      template: SOUR{channel}:VOLTage:OFFSet?
+      validators:
+        channel:
+          max: 2
+          min: 1
+    get_output_state:
+      defaults:
+        channel: 1
+      response:
+        type: str
+      template: OUTPut{channel}:STATe?
+      validators:
+        channel:
+          max: 2
+          min: 1
+waveforms:
+  arbitrary:
+    max_length: 1000000.0
+    memory: 8000000.0
+    resolution: 16
+    sampling_rate:
+      max_val: 1000000.0
+      min_val: 1000.0
+  built_in:
+  - SIN
+  - SQU
+  - RAMP
+  - PULS
+  - NOIS
+  - PRBS
+  - DC
