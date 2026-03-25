@@ -1,0 +1,50 @@
+manufacturer: Keysight
+model: DSOX1204G
+device_type: oscilloscope
+bandwidth: 7.e+7
+sampling_rate: 2.e+9
+memory: 2.e+6
+waveform_update_rate: 2.e+5
+trigger:
+  types: [HIGH, LOW]
+  modes: [EDGE, GLITch, PATTern, SHOLd, TRANsition, TV, SBUS1]
+  slopes: [POS, NEG, EITH, ALT]
+channels:
+  - description: Analog Channel 1
+    channel_range: { min_val: -5, max_val: 5 }
+    input_coupling: [DC, AC]
+    input_impedance: 1.e+6
+    probe_attenuation: [1, 10]
+    timebase: { range: { min_val: 5.e-9, max_val: 50 }, horizontal_resolution: 1.e-12 }
+scpi:
+  commands:
+    set_time_axis: { sequence: [':TIMebase:SCALe {scale}', ':TIMebase:POSition {position}'] }
+    set_channel_axis: { sequence: [':CHANnel{channel}:SCALe {scale}', ':CHANnel{channel}:OFFSet {offset}'], validators: { channel: { min: 1, max: 4 } } }
+    display_channel: { template: 'CHANnel{channel}:DISPlay {state}', validators: { channel: { min: 1, max: 4 } }, enums: { state: { on: "ON", off: "OFF", true: "ON", false: "OFF", "1": "ON", "0": "OFF" } } }
+    set_channel_coupling: { template: ':CHANnel{channel}:COUPling {coupling}', validators: { channel: { min: 1, max: 4 } } }
+    digitize: { template: 'DIGitize {sources}' }
+    set_wave_source: { template: ':WAVeform:SOURce {source}' }
+    set_wave_format_byte: { template: ':WAVeform:FORMat BYTE' }
+    set_wave_points_mode_raw: { template: ':WAVeform:POINts:MODE RAW' }
+    set_wave_points_max: { template: ':WAVeform:POINts MAX' }
+  queries:
+    identify: { template: '*IDN?', response: { type: str } }
+    get_channel_scale: { template: ':CHANnel{channel}:SCALe?', validators: { channel: { min: 1, max: 4 } }, response: { type: float } }
+    get_channel_offset: { template: ':CHANnel{channel}:OFFSet?', validators: { channel: { min: 1, max: 4 } }, response: { type: float } }
+    get_timebase_scale: { template: ':TIMebase:SCALe?', response: { type: float } }
+    get_timebase_position: { template: ':TIMebase:POSition?', response: { type: float } }
+    get_sampling_rate: { template: ':ACQuire:SRATe?', response: { type: float } }
+    acquire_sample_rate: { template: ':ACQuire:SRATe?', response: { type: float } }
+    wave_data: { template: ':WAVeform:DATA?', response: { type: binblock } }
+    wave_preamble: { template: ':WAVeform:PREamble?', response: { type: csv } }
+simulation:
+  scpi:
+    '*IDN?': 'Keysight,DSOX1204G,SIM,1.0'
+    ':CHANnel*:SCALe?': '0.01'
+    ':CHANnel*:OFFSet?': '0.0'
+    ':TIMebase:SCALe?': '0.02'
+    ':TIMebase:POSition?': '0.1'
+    ':ACQuire:SRATe?': '5000000.0'
+    ':WAVeform:PREamble?': '1,2,1000,1,2e-7,0,0,0,0,0'
+    ':WAVeform:DATA?':
+      binary: "dummy_wave.bin"

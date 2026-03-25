@@ -1,0 +1,19 @@
+[project]
+name = "transients-app"
+version = "0.1.0"
+description = "Analogue APS Transients and Calibration"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pytestlab",
+    "polars",
+    "numpy",
+    "scipy",
+        "matplotlib",
+        "pyvisa-py",
+        "pyusb",
+    ]
+    
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"

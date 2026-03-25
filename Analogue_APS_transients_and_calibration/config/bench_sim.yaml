@@ -1,0 +1,21 @@
+bench_name: "Active Pixel PD Derivation Bench (SIM)"
+
+experiment:
+  title: "Photodiode Current Derivation"
+  description: "Mapping I_LED to I_PD using 11pF integration capacitance"
+
+instruments:
+  psu:
+    profile: "keysight/EDU36311A"
+    serial_number: "CN64080020"
+  
+  osc:
+    profile: "config/DSOX1204G_sim.yaml"
+    serial_number: "CN63337417"
+  
+backend_defaults:
+  type: "lamb"
+  url: "http://lamb-server:8000"
+  timeout_ms: 30000
+
+simulate: true
