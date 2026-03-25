@@ -1,0 +1,13 @@
+bench_name: "Generator Sweep Bench"
+
+backend_defaults:
+    type: "lamb"
+    url: "http://lamb-server:8000"
+
+instruments:
+    wfg:
+        profile: "keysight/EDU33212A"
+        serial_number: "CN63490033"
+    osc:
+        profile: "keysight/DSOX1204G"
+        serial_number: "CN63337417"
