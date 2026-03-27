@@ -35,7 +35,7 @@ def main():
     os.makedirs(plot_dir, exist_ok=True)
         # LED Voltage Sweep (PSU CH2) 
         # Starting from 2.7V per calibration results (Linear Region)
-        v_led_steps = np.arange(2.7, 5.1, 0.2) 
+    v_led_steps = np.arange(2.7, 5.1, 0.2) 
     
     waveforms = []
     reference_reset = None
