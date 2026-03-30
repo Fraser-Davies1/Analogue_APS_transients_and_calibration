@@ -7,15 +7,15 @@ experiment:
 instruments:
   psu:
     profile: "keysight/EDU36311A"
-    serial_number: "CN64080020"
+    serial_number: "CN63500044"
   
   osc:
     profile: "keysight/DSOX1204G"
-    serial_number: "CN63337417"
+    serial_number: "CN63347114"
   
   siggen:
-    profile: "config/EDU33212A_fixed.yaml"
-    serial_number: "CN63490033"
+    profile: "keysight/EDU33212A"
+    serial_number: "CN64050080"
 
 backend_defaults:
   type: "lamb"

@@ -1,0 +1,59 @@
+manufacturer: Keysight
+model: EDU33212A
+device_type: waveform_generator
+channels:
+  - description: Channel 1
+    frequency_range:
+      min: 1.e-6
+      max: 20.e+6
+    amplitude_range:
+      min: 1.e-3
+      max: 10
+    offset_range:
+      min: -10
+      max: 10
+  - description: Channel 2
+    frequency_range:
+      min: 1.e-6
+      max: 20.e+6
+    amplitude_range:
+      min: 1.e-3
+      max: 10
+    offset_range:
+      min: -10
+      max: 10
+waveforms:
+  built_in:
+    - SIN
+    - SQU
+    - RAMP
+    - PULS
+    - NOIS
+    - PRBS
+    - DC
+  arbitrary:
+    max_length: 1000000
+    sampling_rate:
+      min: 1000
+      max: 1000000
+scpi:
+  commands:
+    set_function:
+      template: "SOUR{channel}:FUNC {function}"
+    set_frequency:
+      template: "SOUR{channel}:FREQ {frequency}"
+    set_amplitude:
+      template: "SOUR{channel}:VOLTage {amplitude}"
+    set_offset:
+      template: "SOUR{channel}:VOLTage:OFFSet {offset}"
+    set_output_state:
+      template: "OUTPut{channel}:STATe {state}"
+  queries:
+    get_frequency:
+      template: "SOUR{channel}:FREQ?"
+    get_amplitude:
+      template: "SOUR{channel}:VOLTage?"
+    get_offset:
+      template: "SOUR{channel}:VOLTage:OFFSet?"
+    get_output_state:
+      template: "OUTPut{channel}:STATe?"

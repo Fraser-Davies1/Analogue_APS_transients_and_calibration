@@ -7,19 +7,19 @@ experiment:
 instruments:
   psu:
     profile: "keysight/EDU36311A"
-    serial_number: "CN64080039"
+    serial_number: "CN63500044"
   
   osc:
     profile: "keysight/DSOX1204G"
-    serial_number: "CN63497115"
+    serial_number: "CN63347114"
   
   siggen:
     profile: "keysight/EDU33212A"
-    serial_number: "CN64050121"
+    serial_number: "CN64050080"
 
 backend_defaults:
   type: "lamb"
   url: "http://lamb-server:8000"
-  timeout_ms: 30000
+  timeout_ms: 60000
 
 simulate: false
